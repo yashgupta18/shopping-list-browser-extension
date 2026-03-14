@@ -2,6 +2,8 @@
 
 A browser extension that aggregates wishlist and cart items from multiple Indian e-commerce websites in one convenient place.
 
+![Extension Preview](https://github.com/yashgupta18/shopping-list-browser-extension/blob/main/assets/preview.png)
+
 ## Features
 
 ✨ **Multi-Site Support**: Currently supports 8 major Indian e-commerce platforms:
