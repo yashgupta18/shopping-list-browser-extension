@@ -1,0 +1,77 @@
+{
+  "manifest_version": 3,
+  "name": "Shopping Wishlist Aggregator",
+  "version": "1.0.0",
+  "description": "View all your wishlists and carts from different e-commerce sites in one place",
+  "permissions": ["storage", "tabs", "sidePanel"],
+  "host_permissions": [
+    "https://*.ajio.com/*",
+    "https://*.flipkart.com/*",
+    "https://*.amazon.in/*",
+    "https://*.snitch.com/*",
+    "https://*.lifestylestores.com/*",
+    "https://*.myntra.com/*",
+    "https://*.uniqlo.com/*",
+    "https://*.shoppersstop.com/*"
+  ],
+  "side_panel": {
+    "default_path": "popup.html"
+  },
+  "action": {
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://*.ajio.com/*"],
+      "js": ["content-scripts/ajio-content.js"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": ["https://*.flipkart.com/*"],
+      "js": ["content-scripts/flipkart-content.js"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": ["https://*.amazon.in/*"],
+      "js": ["content-scripts/amazon-content.js"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": ["https://*.snitch.com/*"],
+      "js": ["content-scripts/snitch-content.js"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": ["https://*.lifestylestores.com/*"],
+      "js": ["content-scripts/lifestyle-content.js"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": ["https://*.myntra.com/*"],
+      "js": ["content-scripts/myntra-content.js"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": ["https://*.uniqlo.com/*"],
+      "js": ["content-scripts/uniqlo-content.js"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": ["https://*.shoppersstop.com/*"],
+      "js": ["content-scripts/shoppersstop-content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  }
+}

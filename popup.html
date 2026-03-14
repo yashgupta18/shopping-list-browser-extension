@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shopping Wishlist Aggregator</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- Header -->
+      <header class="header">
+        <h1 class="title">
+          <svg
+            class="icon"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M20.5 7.27783L12 12.0001M12 12.0001L3.49997 7.27783M12 12.0001L12 21.5001M21 16.0586V7.94153C21 7.59889 21 7.42757 20.9495 7.27477C20.9049 7.13959 20.8318 7.01551 20.7354 6.91082C20.6263 6.79248 20.4766 6.70928 20.177 6.54288L12.777 2.43177C12.4934 2.27421 12.3516 2.19543 12.2015 2.16454C12.0685 2.13721 11.9315 2.13721 11.7986 2.16454C11.6484 2.19543 11.5066 2.27421 11.223 2.43177L3.82297 6.54288C3.52345 6.70928 3.37369 6.79248 3.26463 6.91082C3.16816 7.01551 3.09515 7.13959 3.05048 7.27477C3 7.42757 3 7.59889 3 7.94153V16.0586C3 16.4013 3 16.5726 3.05048 16.7254C3.09515 16.8606 3.16816 16.9847 3.26463 17.0893C3.37369 17.2077 3.52345 17.2909 3.82297 17.4573L11.223 21.5684C11.5066 21.726 11.6484 21.8047 11.7986 21.8356C11.9315 21.863 12.0685 21.863 12.2015 21.8356C12.3516 21.8047 12.4934 21.726 12.777 21.5684L20.177 17.4573C20.4766 17.2909 20.6263 17.2077 20.7354 17.0893C20.8318 16.9847 20.9049 16.8606 20.9495 16.7254C21 16.5726 21 16.4013 21 16.0586Z"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+          My Shopping List
+        </h1>
+      </header>
+
+      <!-- Navigation Tabs -->
+      <nav class="tabs">
+        <button class="tab active" data-filter="all">All Sites</button>
+        <button class="tab" data-filter="ajio">Ajio</button>
+        <button class="tab" data-filter="flipkart">Flipkart</button>
+        <button class="tab" data-filter="amazon">Amazon</button>
+        <button class="tab" data-filter="myntra">Myntra</button>
+        <button class="tab" data-filter="snitch">Snitch</button>
+        <button class="tab" data-filter="lifestyle">Lifestyle</button>
+        <button class="tab" data-filter="uniqlo">Uniqlo</button>
+        <button class="tab" data-filter="shoppersstop">Shoppers Stop</button>
+      </nav>
+
+      <!-- Search Bar -->
+      <div class="search-container">
+        <input
+          type="text"
+          id="searchInput"
+          class="search-input"
+          placeholder="Search items by name..."
+        />
+        <svg
+          class="search-icon"
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M21 21L15 15M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </div>
+
+      <!-- Type Filter & Sort -->
+      <div class="filter-sort-container">
+        <div class="type-filter">
+          <button class="type-btn active" data-type="all">All Items</button>
+          <button class="type-btn" data-type="wishlist">Wishlist</button>
+          <button class="type-btn" data-type="cart">Cart</button>
+        </div>
+        <div class="sort-container">
+          <label for="sortSelect" class="sort-label">Sort:</label>
+          <select id="sortSelect" class="sort-select">
+            <option value="date-desc">Newest First</option>
+            <option value="date-asc">Oldest First</option>
+            <option value="price-low">Price: Low to High</option>
+            <option value="price-high">Price: High to Low</option>
+            <option value="name">Name A-Z</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Stats -->
+      <div class="stats">
+        <div class="stats-left">
+          <div class="stat-item">
+            <span class="stat-label">Total Items:</span>
+            <span class="stat-value" id="totalItems">0</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">Last Updated:</span>
+            <span class="stat-value" id="lastUpdated">Never</span>
+          </div>
+        </div>
+        <div
+          class="collapse-controls"
+          id="collapseControls"
+          style="display: none"
+        >
+          <button
+            class="collapse-all-btn"
+            id="collapseAllBtn"
+            title="Collapse all site sections"
+          >
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M6 15L12 9L18 15"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+            Collapse All
+          </button>
+          <button
+            class="expand-all-btn"
+            id="expandAllBtn"
+            title="Expand all site sections"
+          >
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M6 9L12 15L18 9"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+            Expand All
+          </button>
+        </div>
+      </div>
+
+      <!-- Items Container -->
+      <div class="items-container" id="itemsContainer">
+        <!-- Items will be dynamically inserted here -->
+      </div>
+
+      <!-- Empty State -->
+      <div class="empty-state" id="emptyState">
+        <svg
+          class="empty-icon"
+          width="64"
+          height="64"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M9 11C9 12.3807 7.88071 13.5 6.5 13.5C5.11929 13.5 4 12.3807 4 11C4 9.61929 5.11929 8.5 6.5 8.5C7.88071 8.5 9 9.61929 9 11Z"
+            stroke="currentColor"
+            stroke-width="1.5"
+          />
+          <path
+            d="M14 6.5L9 10"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+          />
+          <path
+            d="M14 6.5C14 7.88071 15.1193 9 16.5 9C17.8807 9 19 7.88071 19 6.5C19 5.11929 17.8807 4 16.5 4C15.1193 4 14 5.11929 14 6.5Z"
+            stroke="currentColor"
+            stroke-width="1.5"
+          />
+          <path
+            d="M18.2266 13.8631C18.7889 13.3009 19.7111 13.3009 20.2734 13.8631C20.8356 14.4254 20.8356 15.3476 20.2734 15.9098L16.9098 19.2734C16.3476 19.8356 15.4254 19.8356 14.8631 19.2734C14.3009 18.7111 14.3009 17.7889 14.8631 17.2266L18.2266 13.8631Z"
+            stroke="currentColor"
+            stroke-width="1.5"
+          />
+          <path
+            d="M5.50063 18.5C6.3144 18.5 7.12817 18.5 7.94194 18.5C9.57117 18.5 10.3858 18.5 11.0694 18.1194C11.6755 17.7825 12.1575 17.2565 12.4393 16.622C12.7643 15.8942 12.7643 14.9826 12.7643 13.1593L12.7643 10.1593C12.7643 8.33599 12.7643 7.42433 12.4393 6.69651C12.1575 6.06199 11.6755 5.53601 11.0694 5.19918C10.3858 4.81855 9.57117 4.81855 7.94194 4.81855C7.12817 4.81855 6.3144 4.81855 5.50063 4.81855C3.8714 4.81855 3.05678 4.81855 2.37316 5.19918C1.76709 5.53601 1.28504 6.06199 1.00325 6.69651C0.678223 7.42433 0.678223 8.33599 0.678223 10.1593L0.678223 13.1593C0.678223 14.9826 0.678223 15.8942 1.00325 16.622C1.28504 17.2565 1.76709 17.7825 2.37316 18.1194C3.05678 18.5 3.8714 18.5 5.50063 18.5Z"
+            stroke="currentColor"
+            stroke-width="1.5"
+          />
+        </svg>
+        <p class="empty-text">No items found</p>
+        <p class="empty-subtext">
+          Visit Ajio, Flipkart, or Amazon and add items to your wishlist or cart
+        </p>
+      </div>
+
+      <!-- Footer -->
+      <footer class="footer">
+        <button class="refresh-btn" id="refreshBtn">
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M21 10C21 10 18.995 7.26822 17.3662 5.63824C15.7373 4.00827 13.4864 3 11 3C6.02944 3 2 7.02944 2 12C2 16.9706 6.02944 21 11 21C15.1031 21 18.5649 18.2543 19.6482 14.5M21 10V4M21 10H15"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+          Refresh
+        </button>
+      </footer>
+    </div>
+
+    <script src="popup.js"></script>
+  </body>
+</html>
